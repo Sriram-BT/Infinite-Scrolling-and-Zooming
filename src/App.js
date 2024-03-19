@@ -31,7 +31,7 @@ function App() {
   let getDataFrame = async (ajaxArgs) => {
     let query = `SELECT pickup_datetime ,trip_distance  FROM trips WHERE pickup_datetime BETWEEN '${ajaxArgs.startVisible}' and '${ajaxArgs.endVisible}'`;
     const response = await fetch(
-      `https://demo.questdb.io/exec?query=${encodeURIComponent(query)}`
+      `https://demo.questdb.io/exec?query=${encodeURIComponent(query)}`,
     );
     const json = await response.json();
     let zoomingData = [];
@@ -54,7 +54,7 @@ function App() {
         endVisible: getDateString(visualRange.endValue),
         startBound: getDateString(storage.length ? storage[0].X : null),
         endBound: getDateString(
-          storage.length ? storage[storage.length - 1].X : null
+          storage.length ? storage[storage.length - 1].X : null,
         ),
       };
       if (
@@ -81,7 +81,7 @@ function App() {
           });
       }
     },
-    [visualRange]
+    [visualRange],
   );
   const onVisualRangeChanged = useCallback(
     (e) => {
@@ -101,7 +101,7 @@ function App() {
         uploadDataByVisualRange(e);
       }
     },
-    [visualRange, uploadDataByVisualRange]
+    [visualRange, uploadDataByVisualRange],
   );
   const handleChange = useCallback(
     (e) => {
@@ -138,7 +138,7 @@ function App() {
         onVisualRangeChanged(e);
       }
     },
-    [setVisualRange, visualRange, onVisualRangeChanged, wholeRange]
+    [setVisualRange, visualRange, onVisualRangeChanged, wholeRange],
   );
   function getDateString(dateTime) {
     return dateTime ? dateTime.toISOString() : "";
